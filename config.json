@@ -1,6 +1,6 @@
 {
-   "owner": "6285887776722",
-   "owner_name": "Wildan Izzudin",
+   "owner": "25438701209",
+   "owner_name": "Genesis",
    "database": "data",
    "limit": 15,
    "ram_limit": "900mb",
@@ -16,6 +16,6 @@
    "evaluate_chars":  ["=>", "~>", "<", ">", "$"],
    "pairing": {
       "state": true,
-      "number": 6282258694977
+      "number": 254738701209
    }
 }
