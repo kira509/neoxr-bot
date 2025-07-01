@@ -9,15 +9,16 @@ RUN apt-get update && apt-get install -y ffmpeg curl && \
 WORKDIR /app
 
 # Install dependencies
-COPY package.json yarn.lock ./
-RUN yarn install
+COPY package.json ./
+RUN yarn install || npm install
 
 # Copy the rest of the project files
 COPY . .
 
-# Expose port (optional for logs)
+# Expose port (optional)
 EXPOSE 3000
 
 # Start the bot
 CMD ["node", "index.js"]
+
 
