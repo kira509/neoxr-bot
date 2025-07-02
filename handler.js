@@ -46,11 +46,11 @@ module.exports = async (client, ctx) => {
       // exception disabled plugin
       var plugins = Object.fromEntries(Object.entries(plugins).filter(([name, _]) => !setting.pluginDisable.includes(name)))
 
-      if (!setting.online) client.sendPresenceUpdate('unavailable', m.chat)
-      if (setting.online) {
-         client.sendPresenceUpdate('available', m.chat)
-         client.readMessages([m.key])
-      }
+     // Optional: disable presence and read receipts to reduce activity
+if (setting.online && prefix) {
+   client.sendPresenceUpdate('composing', m.chat)
+}
+
       if (m.isGroup && !isBotAdmin) {
          groupSet.localonly = false
       }
@@ -62,7 +62,11 @@ module.exports = async (client, ctx) => {
          spam: 0
       })
       if (!setting.multiprefix) setting.noprefix = false
-      if (setting.debug && !m.fromMe && isOwner) client.reply(m.chat, Func.jsonFormat(m), m)
+      // Only log if it's a command or error and debug mode is enabled
+if (setting.debug && isOwner && (prefix || command || m.messageStubType)) {
+   console.log(`[📥 Command]: ${body} from ${m.sender}`)
+}
+
       if (m.isGroup && !groupSet.stay && (new Date * 1) >= groupSet.expired && groupSet.expired != 0) {
          return client.reply(m.chat, Func.texted('italic', '🚩 Bot time has expired and will leave from this group, thank you.', null, {
             mentions: participants.map(v => v.id)
