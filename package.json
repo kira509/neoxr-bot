@@ -41,9 +41,9 @@
   "speedtest-net": "1.6.2",
   "streamifier": "^0.1.1",
   "translate-google-api": "1.0.4"
-}
-
-   "devDependencies": {
+},
+"devDependencies": {
+   
       "css-select": "5.1.0"
    }
 }
